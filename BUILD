@@ -1,7 +1,8 @@
 cc_binary(
-	name='Hello.exe',
-	srcs='main.cpp',
+	name="Hello.exe",
+	srcs="main.cpp",
 	deps=[
-	    '//stringutil:stringutil',
+	    ""//cpputil/stringutil:stringutil",
+	    "//cpputil/jsonutil:jsonutil",
 	]
 )
