@@ -4,5 +4,6 @@ cc_binary(
 	deps=[
 	    "//cpputil/stringutil:stringutil",
 	    "//cpputil/jsonutil:jsonutil",
+	    "//cpputil/boost:boost",
 	]
 )
