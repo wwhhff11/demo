@@ -7,15 +7,24 @@
 #include <boost/timer.hpp>
 
 int main() {
-    std::cout << concat("111111", "222222") << std::endl;
-    std::cout << find("1112222", "12") << std::endl;
+	std::cout << concat("111111", "222222") << std::endl;
+	std::cout << find("1112222", "12") << std::endl;
 
-    deserializer("{\"a\": 1}");
+	deserializer("{\"a\": 1}");
 
-    boost::timer tm;
+	boost::timer tm;
 
-    //输出程序运行的时间长度
-    std::cout << tm.elapsed();
+	for(int i=0;i<10000;i++)
+	{
+		for(int j=0;j<10000;j++)
+		{
+			j++;
+			j--;
+		}
+	}
 
-    return 0;
+	//输出程序运行的时间长度
+	std::cout<<"==============>" << tm.elapsed();
+
+	return 0;
 }
