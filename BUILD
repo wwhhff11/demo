@@ -7,4 +7,5 @@ cc_binary(
 	    "//cpputil/boost:boost",
         "#pthread",
     ],
+    warning=["-Werror=unused-variable"]
 )

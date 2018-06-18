@@ -21,6 +21,14 @@
 
 #include <boost/thread.hpp> 
 
+#include <boost/filesystem.hpp> 
+#include <boost/filesystem/fstream.hpp> 
+
+#include <boost/date_time/gregorian/gregorian.hpp> 
+#include <boost/date_time/posix_time/posix_time.hpp> 
+
+#include <boost/cast.hpp> 
+
 void smart_point_test(){
 	// 作用域指针
 	/*
@@ -150,9 +158,57 @@ void hello()
 	} 
 } 
 
-void thread_test() 
-{
+void thread_test() {
 	//boost::thread myThread(hello);
+} 
+
+void file_system_test(){
+	// write
+	boost::filesystem::path p("/home/ubuntu/worksp/demo/test.txt"); 
+	boost::filesystem::ofstream ofs(p); 
+	ofs << "===>" << std::endl;
+
+	// read
+	boost::filesystem::ifstream ifs(p.string().c_str());
+	assert(ifs.is_open());
+	std::cout<<ifs.rdbuf()<< std::endl;
+}
+
+void date_time_test(){
+	// 获取时间戳
+	boost::posix_time::ptime epoch(boost::gregorian::date(1970, boost::gregorian::Jan, 1));
+	boost::posix_time::time_duration time_from_epoch = boost::posix_time::second_clock::universal_time() - epoch;
+	std::cout<<time_from_epoch.total_seconds()<< std::endl;
+}
+
+struct father 
+{ 
+	virtual ~father() { }; 
+}; 
+
+struct mother 
+{ 
+	virtual ~mother() { }; 
+}; 
+
+struct child : 
+	public father, 
+	public mother 
+{ 
+}; 
+
+void func(father *f) 
+{ 
+	child *c = boost::polymorphic_downcast<child*>(f); 
+} 
+
+void cast_test() 
+{ 
+	child *c = new child; 
+	func(c); 
+
+	father *f = new child; 
+	mother *m = boost::polymorphic_cast<mother*>(f); 
 } 
 
 int main() {
@@ -161,5 +217,8 @@ int main() {
 	signal_test();
 	string_test();
 	thread_test();
+	file_system_test();
+	date_time_test();
+	cast_test();
 	return 0;
 }
