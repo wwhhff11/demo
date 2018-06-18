@@ -16,6 +16,11 @@
 #include <boost/bind.hpp> 
 #include <boost/function.hpp> 
 
+#include <boost/algorithm/string.hpp> 
+#include <boost/format.hpp> 
+
+#include <boost/thread.hpp> 
+
 void smart_point_test(){
 	// 作用域指针
 	/*
@@ -123,9 +128,38 @@ void signal_test(){
 	s(); // 触发就执行 
 }
 
+void string_test(){
+	// string test	
+	std::string s = "Boris Schäling"; 
+	std::cout << boost::algorithm::to_upper_copy(s) << std::endl; 
+	std::cout << boost::algorithm::erase_all_copy(s, "i") << std::endl; 
+	std::cout << boost::algorithm::find_first(s, "i") << std::endl; 
+	std::vector<std::string> v; 
+	v.push_back("Boris"); 
+	v.push_back("Schäling"); 
+	std::cout << boost::algorithm::join(v, " ") << std::endl;
+	std::cout << "." << boost::algorithm::trim_left_copy(s) << "." << std::endl;
+	std::cout << boost::format("%1%.%2%.%3%") % 16 % 9 % 2008 << std::endl; 
+}
+
+void hello() 
+{ 
+	for (int i = 0; i < 5; ++i) 
+	{ 
+		std::cout << i << std::endl; 
+	} 
+} 
+
+void thread_test() 
+{
+	//boost::thread myThread(hello);
+} 
+
 int main() {
 	smart_point_test();
 	func_object_test();
 	signal_test();
+	string_test();
+	thread_test();
 	return 0;
 }

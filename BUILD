@@ -5,5 +5,6 @@ cc_binary(
 	    "//cpputil/stringutil:stringutil",
 	    "//cpputil/jsonutil:jsonutil",
 	    "//cpputil/boost:boost",
-	],
+        "#pthread",
+    ],
 )
